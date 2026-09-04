@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA BARBER | Мужские стрижки и бритьё</title>
+    <style>
+        /* === БАЗОВЫЕ СТИЛИ === */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f0f0f;
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* === ШАПКА И НАВИГАЦИЯ === */
+        header {
+            background-color: #1a1a1a;
+            border-bottom: 2px solid #c9a227;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #c9a227;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 1px solid #333;
+            color: #aaa;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .nav-btn:hover {
+            border-color: #c9a227;
+            color: #c9a227;
+        }
+
+        .nav-btn.active {
+            background-color: #c9a227;
+            color: #0f0f0f;
+            border-color: #c9a227;
+            font-weight: bold;
+        }
+
+        /* === ОСНОВНОЙ КОНТЕНТ === */
+        main {
+            flex: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            width: 100%;
+        }
+
+        .section {
+            display: none; /* Скрываем все секции по умолчанию */
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block; /* Показываем активную */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #c9a227;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        /* === ГЛАВНАЯ === */
+        .hero {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .hero img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 8px;
+            border: 2px solid #c9a227;
+            margin-bottom: 25px;
+            object-fit: cover;
+            max-height: 400px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto 25px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: #c9a227;
+            color: #0f0f0f;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .cta-btn:hover {
+            background-color: #e0b830;
+        }
+
+        /* === УСЛУГИ === */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 3px solid #c9a227;
+        }
+
+        .service-card h3 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .service-card p {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        /* === ЦЕНЫ === */
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .price-table th, .price-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        .price-table th {
+            background: #c9a227;
+            color: #0f0f0f;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .price-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .price-table td:last-child {
+            text-align: right;
+            color: #c9a227;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* === ГАЛЕРЕЯ === */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #333;
+            transition: transform 0.3s, border-color 0.3s;
+            cursor: pointer;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.03);
+            border-color: #c9a227;
+        }
+
+        /* === КОНТАКТЫ === */
+        .contacts-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .contact-info {
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .contact-item {
+            margin-bottom: 20px;
+        }
+
+        .contact-item strong {
+            color: #c9a227;
+            display: block;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .contact-item span {
+            font-size: 16px;
+            color: #e0e0e0;
+        }
+
+        .map-placeholder {
+            background: #1a1a1a;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 250px;
+            border: 1px dashed #333;
+            color: #666;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* === ФУТЕР === */
+        footer {
+            background: #1a1a1a;
+            text-align: center;
+            padding: 15px;
+            color: #666;
+            font-size: 12px;
+            border-top: 1px solid #333;
+            margin-top: auto;
+        }
+
+        /* === АДАПТИВ ПОД ТЕЛЕФОН === */
+        @media (max-width: 600px) {
+            .logo { font-size: 20px; }
+            .nav-btn { padding: 6px 12px; font-size: 12px; }
+            h2 { font-size: 22px; }
+            .contacts-wrapper { grid-template-columns: 1fr; }
+            .hero img { max-height: 250px; }
+            .gallery-grid img { height: 180px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ШАПКА С КНОПКАМИ -->
+    <header>
+        <div class="header-container">
+            <div class="logo">AURA BARBER</div>
+            <nav>
+                <button class="nav-btn active" onclick="showSection('home', this)">Главная</button>
+                <button class="nav-btn" onclick="showSection('services', this)">Услуги</button>
+                <button class="nav-btn" onclick="showSection('prices', this)">Цены</button>
+                <button class="nav-btn" onclick="showSection('gallery', this)">Галерея</button>
+                <button class="nav-btn" onclick="showSection('contacts', this)">Контакты</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <main>
+        
+        <!-- ГЛАВНАЯ -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <!-- Главное фото -->
+                <img src="image/2.jpg" alt="AURA BARBER - мужская стрижка">
+                <h2>Стиль. Точность. Характер.</h2>
+                <p>Мужской барбершоп нового поколения. Классические и современные стрижки, королевское бритьё, моделирование бороды. Доверь свой образ профессионалам.</p>
+                <a href="#" class="cta-btn" onclick="showSection('contacts', document.querySelectorAll('.nav-btn')[4]); return false;">Записаться</a>
+            </div>
+        </section>
+
+        <!-- УСЛУГИ -->
+        <section id="services" class="section">
+            <h2>Наши услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>✂️ Мужская стрижка</h3>
+                    <p>Классические и современные фасоны. Подбор формы под тип лица и структуру волос.</p>
+                </div>
+                <div class="service-card">
+                    <h3>🪒 Бритьё опасной бритвой</h3>
+                    <p>Королевская процедура с горячим полотенцем, маслами и идеальной гладкостью.</p>
+                </div>
+                <div class="service-card">
+                    <h3>🧔 Моделирование бороды</h3>
+                    <p>Стрижка, коррекция формы, уход. Придадим бороде чёткие линии и ухоженный вид.</p>
+                </div>
+                <div class="service-card">
+                    <h3>💈 Стрижка + борода</h3>
+                    <p>Комплексный уход за образом. Полный сервис за одно посещение.</p>
+                </div>
+                <div class="service-card">
+                    <h3>👦 Детская стрижка</h3>
+                    <p>Для юных джентльменов от 5 лет. Терпеливо, аккуратно и стильно.</p>
+                </div>
+                <div class="service-card">
+                    <h3> Камуфляж седины</h3>
+                    <p>Естественное тонирование волос и бороды. Без эффекта «крашеных» волос.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЦЕНЫ -->
+        <section id="prices" class="section">
+            <h2>Прайс-лист</h2>
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th>Услуга</th>
+                        <th>Цена</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Мужская стрижка</td><td>1 500 ₽</td></tr>
+                    <tr><td>Стрижка машинкой</td><td>800 ₽</td></tr>
+                    <tr><td>Моделирование бороды</td><td>1 000 ₽</td></tr>
+                    <tr><td>Бритьё опасной бритвой</td><td>1 200 ₽</td></tr>
+                    <tr><td>Стрижка + борода (комплекс)</td><td>2 200 ₽</td></tr>
+                    <tr><td>Детская стрижка (до 12 лет)</td><td>1 000 ₽</td></tr>
+                    <tr><td>Камуфляж седины</td><td>1 500 ₽</td></tr>
+                    <tr><td>Чёрная маска для лица</td><td>500 ₽</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top: 15px; color: #888; font-size: 14px; text-align: center;">* Точную стоимость уточняйте у мастера. Возможны индивидуальные решения.</p>
+        </section>
+
+        <!-- ГАЛЕРЕЯ -->
+        <section id="gallery" class="section">
+            <h2>Наши работы</h2>
+            <div class="gallery-grid">
+                <!-- Фотографии из папки image -->
+                <img src="image/1.jpg" alt="Мужская стрижка фейд с бородой">
+                <img src="image/2.jpg" alt="Процесс стрижки в AURA BARBER">
+                <img src="image/3.jpg" alt="Текстурная мужская стрижка">
+                <img src="image/4.jpg" alt="Чёткий фейд и линия бороды">
+            </div>
+        </section>
+
+        <!-- КОНТАКТЫ -->
+        <section id="contacts" class="section">
+            <h2>Контакты и запись</h2>
+            <div class="contacts-wrapper">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <strong>📍 Адрес</strong>
+                        <span>г. Москва, ул. Примерная, д. 1<br>(замени на реальный адрес)</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>📞 Телефон / WhatsApp</strong>
+                        <span>+7 (999) 123-45-67<br>(замени на реальный номер)</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>🕒 Часы работы</strong>
+                        <span>Пн–Пт: 10:00 – 21:00<br>Сб–Вс: 11:00 – 20:00</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>📲 Запись онлайн</strong>
+                        <span>
+                            <a href="https://wa.me/79991234567" class="cta-btn" style="padding: 8px 20px; font-size: 14px;" target="_blank">Написать в WhatsApp</a>
+                        </span>
+                    </div>
+                </div>
+                <div class="map-placeholder">
+                    🗺️ Здесь будет карта Яндекс/Google<br><br>
+                    <small>Чтобы вставить реальную карту: зайди на Яндекс.Карты → «Поделиться» → «Код карты» → вставь сюда вместо этого блока</small>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ФУТЕР -->
+    <footer>
+        © 2026 AURA BARBER. Все права защищены. | Стиль. Точность. Характер.
+    </footer>
+
+    <!-- СКРИПТ ПЕРЕКЛЮЧЕНИЯ РАЗДЕЛОВ -->
+    <script>
+        function showSection(sectionId, btnElement) {
+            // Скрываем все секции
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(sec => sec.classList.remove('active'));
+            
+            // Убираем активный класс у всех кнопок
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Показываем нужную секцию
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Подсвечиваем нажатую кнопку
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
+            
+            // Прокрутка вверх при переключении (для мобильных)
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
+ Не отвечай
